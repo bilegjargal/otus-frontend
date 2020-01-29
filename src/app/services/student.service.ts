@@ -20,4 +20,9 @@ export class StudentService {
     const requestUrl = `${"http://localhost:8080/students/search/" + searchParam}`;
     return this._httpClient.get(requestUrl).toPromise();
   }
+
+  getCourses(){
+    const requestUrl = `${"http://localhost:8080/courses"}`
+    return this._httpClient.get(requestUrl).toPromise();
+  }
 }

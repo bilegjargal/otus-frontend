@@ -18,10 +18,12 @@ export class StudentDialogComponent implements OnInit {
   lastName: string;
   email: string;
   avgGpa: number;
-  grades: any;
+  //i know this is bad, but fix this later
+  grades: any[] = new Array();
   displayedColumns: string[] = ["courseName", "grade"];
-
+  dataSource: any[];
   constructor(
+    private studentService: StudentService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<StudentsListComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -29,10 +31,29 @@ export class StudentDialogComponent implements OnInit {
     this.firstName = data.first;
     this.lastName = data.last;
     this.email = data.email;
-    this.grades = data.studentClasses;
+    this.studentService.getCourses()
+      .then((courses: any) => {
+        data.studentClasses.map((elem) => {
+          //filling the course name with corresponding id
+          let courseObj = {
+            courseName: courses[elem.id],
+            grade: elem.grade
+          }
+          this.grades.push(courseObj);
+        });
+        this.dataSource = this.grades;
+        let temp = 0;
+        this.grades.map((elem) => {
+          temp += parseFloat(elem.grade);
+        });
+        this.avgGpa = temp / this.grades.length;
+
+      })
   }
 
   ngOnInit() {
+    //calc avg GPA
+
     this.studentDetailForm = this.fb.group({
       firstName: this.firstName || '',
       lastName: this.lastName || '',
@@ -40,12 +61,17 @@ export class StudentDialogComponent implements OnInit {
       avgGpa: this.avgGpa || '',
       dataSource: this.grades
     });
+    this.studentDetailForm.disable();
 
+  }
+  getTotalCost() {
+    let avg = this.grades
+      .map(t => t.grade)
+      .reduce((acc, value) => acc + value, 0) / this.grades.length;
+    return avg.toFixed(2);
   }
 
   onClose(): void {
     this.dialogRef.close();
   }
-  //TODO: fetch courses table and fill studentClasses table and calculate avgGPA
-  //TODO: add styling for dialog
 }
