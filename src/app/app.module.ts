@@ -18,6 +18,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule, MatInputModule, MAT_DIALOG_DATA } from "@angular/material";
 
 const appRoutes: Routes = [
+  { path: "", redirectTo: 'students', pathMatch: 'full' },
   { path: "students", component: StudentsListComponent },
   { path: "", component: StudentDialogComponent}
 ];
