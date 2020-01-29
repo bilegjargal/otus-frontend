@@ -59,7 +59,7 @@ export class StudentsListComponent implements OnInit {
 
   openDetailDialog(data): void{
     const dialogRef = this.dialog.open(StudentDialogComponent, {
-      width: '90%',
+      width: '50%',
       data: data
     });
   }

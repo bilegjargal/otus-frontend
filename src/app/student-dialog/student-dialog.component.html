@@ -1,36 +1,36 @@
-<div class="modal">
+<div class="modal-wrap">
   <div class="modal-header">
     <h3>
-      <span (click)="onClose()" class="close pull-right">x</span>
       Student Detail
     </h3>
+    <span (click)="onClose()" class="close">x</span>
   </div>
   <div class="content">
     <form class="dialog-form" [formGroup]="studentDetailForm">
-      <div class="left">
+      <section class="studentInfo">
         <div class="form-element">
           <label class="form-label">First Name</label>
-          <mat-form-field>
+          <mat-form-field class="form-input" style="width: 250px !important">
             <input matInput formControlName="firstName">
           </mat-form-field>
         </div>
 
         <div class="form-element">
           <label class="form-label">Last Name</label>
-          <mat-form-field>
+          <mat-form-field class="form-input" style="width: 250px !important">
             <input matInput formControlName="lastName">
           </mat-form-field>
         </div>
 
         <div class="form-element">
           <label class="form-label">Email</label>
-          <mat-form-field>
+          <mat-form-field class="form-input" style="width: 250px !important">
             <input matInput formControlName="email">
           </mat-form-field>
         </div>
-      </div>
+      </section>
 
-      <div class="right">
+      <section class="grades">
         <table mat-table [dataSource]="dataSource" class="table" matSort matSortActive="courseName" matSortDisableClear
           matSortDirection="desc">
           <!-- Course Name Column -->
@@ -51,7 +51,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
         </table>
-      </div>
+      </section>
     </form>
   </div>
 </div>

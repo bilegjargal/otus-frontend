@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject } from "@angular/core";
+import { Component, OnInit, ViewChild, Inject, ViewEncapsulation } from "@angular/core";
 import { StudentService } from '../services/student.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -8,7 +8,8 @@ import { StudentsListComponent } from '../students-list/students-list.component'
 @Component({
   selector: "student-dialog",
   templateUrl: "./student-dialog.component.html",
-  styleUrls: ["./student-dialog.component.css"]
+  styleUrls: ["./student-dialog.component.css"],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class StudentDialogComponent implements OnInit {
 
